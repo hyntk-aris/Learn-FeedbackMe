@@ -1,0 +1,289 @@
+/* Merged tokens (Locofy + Figma node 37:22546) */
+*{
+    padding:0;
+    margin:0;
+}
+:root {
+	/* Colors */
+	--color-primary-700: #d93131;            /* Primary/700 */
+	--color-primary-600: #e64343;            /* Primary/600 (Main) */
+	--color-primary-50: #fde8e8;             /* Primary/50 secondary btn bg */
+	--color-white: #ffffff;                   /* Natural/white */
+	--color-heading: #2c2b54;                /* Text/White BG/Heading */
+	--color-title: #2c2b54e5;                /* Text/White BG/Title (~90%) */
+	--color-description: #2c2b54cc;          /* Text/White BG/Description (~80%) */
+	--color-divider: rgba(128,128,128,0.15); /* 0.7px border on tagline chip */
+
+	/* Typography */
+	--font-family-sf-pro: "SF Pro Display", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+	--font-weight-heading: 600;              /* display/button weight */
+	--font-weight-body: 400;
+	--font-size-display: 78px;               /* main title */
+    --font-size-h2: 26px;             /* heading 2 */
+	--font-size-body: 18px;                  /* copy */
+	--font-size-small: 14px;                 /* stat desc */
+	--font-size-button-lg: 20px;             /* buttons/stat numbers */
+    
+	--lh-100: 1.1;
+
+	/* Radius */
+	--radius-8: 8px;
+	--radius-16: 16px;
+	--radius-64: 64px;
+
+	/* Spacing (exact from Locofy) */
+	--space-4: 4px;
+	--space-10: 10px;
+	--space-16: 16px;
+	--space-20: 20px;
+	--space-32: 32px;
+	--space-64: 64px;
+	--page-padding-x: 120px;                 /* frame padding */
+	--column-gap: 80px;                      /* grid gap */
+
+	/* Button shadow (exact) */
+	--btn-shadow-1: 17px 34px 11px rgba(213, 61, 45, 0);
+	--btn-shadow-2: 11px 22px 10px rgba(213, 61, 45, 0.03);
+	--btn-shadow-3: 6px 12px 8px rgba(213, 61, 45, 0.1);
+	--btn-shadow-4: 3px 4.9999995232px 6px rgba(213, 61, 45, 0.17);
+	--btn-shadow-5: 0.9999999404px 0.9999999404px 3px rgba(213, 61, 45, 0.2);
+
+	/* Background gradient (from Locofy) */
+	--hero-bg: radial-gradient(50% 50% at 50% 50%, rgba(251,148,148,0.2), rgba(255,255,255,0.2)), var(--color-white);
+
+	/* Image/Frame */
+	--hero-image-w: 590px;
+	--hero-image-h: 800px;
+
+	/* Glass card styling (Locofy precise values) */
+	--card-blur: 44.87px;
+	--card-bg: rgba(255,255,255,0.9);
+	--card-border: 1.3px solid rgba(255,255,255,0.09);
+
+    /* --- Fluid Values (As Requested) --- */
+--fluid-hero-fontsize: clamp(42px, 1rem + 5vw, var(--font-size-display));
+--fluid-btn-fontsize: clamp(16px, 0.5rem + 1vw, var(--font-size-button-lg));
+--fluid-btn-padding: clamp(14px, 1.5vw, 20px) clamp(28px, 3vw, 32px);
+}
+
+/* Section container */
+.hero {
+	position: relative;
+	width: 100%;
+	border-radius: 0 0 var(--radius-64) var(--radius-64);
+	background: var(--hero-bg);
+	overflow: hidden;
+	text-align: left;
+	font-family: var(--font-family-sf-pro);
+	color: var(--color-heading);
+    background: radial-gradient(50% 50% at 50% 50%, rgba(251, 148, 148, 0.2), rgba(255, 255, 255, 0.2)), var(--color-white);
+}
+
+.hero__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Cho nó cao bằng section cha */
+    
+
+    /* Các thuộc tính cho ảnh nền */
+    background-image: url('assets/images/background.png'); /* <-- THAY ĐỔI ĐƯỜNG DẪN NÀY CHO ĐÚNG */
+    background-size: cover;       /* Giúp ảnh nền lấp đầy mà không bị méo */
+    background-position: center;  /* Căn ảnh nền vào giữa */
+    background-repeat: no-repeat; /* Không lặp lại ảnh nền */
+}
+/* Two-column layout via Grid (semantic upgrade over absolute layout) */
+.hero__container {
+	margin-inline: auto;
+	display: grid;
+    max-width: 1200px;
+    min-height: 800px;
+	grid-template-columns: repeat(12, 1fr);
+	align-items: stretch;
+	column-gap: var(--space-20);
+	padding: 0 var(--page-padding-x);
+}
+
+/* Media column with positioned children */
+.hero__media {
+    grid-column: 7 / span 6;
+    position: relative; /* Cần thuộc tính này để định vị floating cards */
+    height: 100%;
+}
+
+.hero__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Rất quan trọng: Giúp ảnh không bị méo khi lấp đầy */
+    border-bottom-left-radius: var(--radius-64);
+    border-bottom-right-radius: var(--radius-64);
+}
+
+/* Content column */
+.hero__content {
+	  /* Bắt đầu từ vạch kẻ cột số 1 và chiếm chiều rộng của 6 cột */
+      grid-column: 1 / span 6; 
+
+      /* Xóa các thuộc tính layout cũ nếu có */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-16);
+}
+
+/* Tagline chip (border 0.7px and padding 16/20) */
+.hero__tagline {
+	display: inline-flex;
+	align-items: left;
+	justify-content: left;
+	border-radius: var(--radius-8);
+	border: 0.7px solid var(--color-divider);
+	padding: var(--space-16) var(--space-20);
+    width: fit-content;
+	font-size: var(--font-size-body);
+	line-height: var(--lh-100);
+	margin-top: 136px; /* matches Figma placement within content frame */
+}
+
+/* Title with two independent lines */
+.hero__title {
+    margin: 0;
+    color: var(--color-title);
+    font-weight: var(--font-weight-heading);
+    line-height: 1.2; /* Sửa lại cho dễ đọc */
+    font-size: var(--fluid-hero-fontsize); /* Thay đổi ở đây */
+}
+.hero__title-line1,
+.hero__title-line2 {
+    display: block;       /* QUAN TRỌNG: Ép mỗi span xuống một hàng */
+    white-space: nowrap;  /* Chống tự động ngắt chữ bên trong */
+}
+.c-primary { color: var(--color-primary-700); }
+
+/* Subtitle */
+.hero__subtitle {
+	color: rgba(44,43,84,0.9);
+	font-size: var(--font-size-body);
+	line-height: var(--lh-100);
+}
+.hero__subtitle p { margin: 0; }
+.hero__subtitle .c-accent { color: var(--color-primary-600); }
+
+/* CTA area (padding 64 top/bottom, gap 20) */
+.hero__cta {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-20);
+	padding-block: var(--space-64);
+	font-size: var(--font-size-button-lg);
+}
+
+/* Buttons */
+.btn {
+	border: 0;
+	border-radius: var(--radius-16);
+	padding: var(--fluid-btn-padding);
+	font-size: var(--fluid-btn-fontsize);
+	font-weight: var(--font-weight-heading);
+	line-height: var(--lh-100);
+	cursor: pointer;
+	transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+.btn--primary {
+	color: #fff;
+	background: var(--color-primary-700);
+	box-shadow:
+		var(--btn-shadow-1),
+		var(--btn-shadow-2),
+		var(--btn-shadow-3),
+		var(--btn-shadow-4),
+		var(--btn-shadow-5);
+        white-space: nowrap;
+}
+.btn--primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.btn--secondary {
+	color: var(--color-primary-600);
+	background: var(--color-primary-50);
+	backdrop-filter: blur(33.48px); /* Locofy secondary button blur */
+    white-space: nowrap;
+}
+.btn--secondary:hover { filter: brightness(0.98); transform: translateY(-1px); }
+
+/* Floating stat cards — exact positions from Figma (Locofy) */
+.stat-card {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	gap: 10.7px;
+	padding: var(--space-10) var(--space-16);
+	border-radius: var(--radius-8);
+	background: var(--card-bg);
+	border: var(--card-border);
+	backdrop-filter: blur(var(--card-blur));
+	overflow: hidden;
+}
+.stat-card--1 { top: 196px; left: 0; }
+.stat-card--2 { top: 285px; right: -62px; }
+.stat-card--3 { top: 518px; left: 0; }
+.stat-card--4 { top: 630px; right: 0; }
+
+.stat-card__icon {
+	width: 60px;
+	height: 60px;
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+.stat-card__icon img { width: 48px; height: 48px; object-fit: cover; }
+.stat-card__text { display: grid; gap: var(--space-4); }
+.stat-card__value {
+	margin: 0;
+	color: var(--color-primary-700);
+	font-weight: var(--font-weight-heading);
+	font-size: var(--font-size-h2);
+	line-height: var(--lh-100);
+}
+.stat-card__desc {
+	margin: 0;
+	color: rgba(44,43,84,0.8);
+	font-size: var(--font-size-small);
+	line-height: var(--lh-100);
+}
+
+/* Tablet ≤ 1024px: keep two columns, reduce paddings and gap */
+@media (max-width: 1024px) {
+	.hero__container {
+		column-gap: calc(var(--column-gap) * 0.8);
+		padding-inline: calc(var(--page-padding-x) * 0.7);
+	}
+}
+
+/* Mobile ≤ 768px:
+   - Stack to one column
+   - Media above content
+   - Cards become a static 2x2 grid after the image */
+@media (max-width: 768px) {
+	.hero__container {
+		grid-template-columns: 1fr;
+		padding-inline: var(--space-16);
+		row-gap: var(--space-20);
+	}
+	
+
+	/* Convert stat cards to grid below image */
+	.hero__media {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--space-16);
+		align-items: start;
+	}
+	.hero__image { grid-column: 1 / -1; width: 100%; max-width: none; }
+
+	.stat-card {
+		position: static; /* key requirement */
+		width: 100%;
+	}
+}
